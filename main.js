@@ -22,12 +22,16 @@ webSocket.onmessage = function (event) {
         cb.innerHTML = parseFloat(JSON.parse(event.data).change).toFixed(2)+"%";
         if(JSON.parse(event.data).change>0){
             cb.classList.add("g");    
+        }else{
+            cb.classList.remove("g");
         }
     }else{
         e.innerHTML = parseFloat(JSON.parse(event.data).markPrice).toFixed(2);
         ce.innerHTML = parseFloat(JSON.parse(event.data).change).toFixed(2)+"%";
         if(JSON.parse(event.data).change>0){
             ce.classList.add("g");    
+        }else{
+            ce.classList.remove("g");
         }
     }
 }
