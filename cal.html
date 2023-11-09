@@ -61,13 +61,24 @@
 
     <script>
         function generateCalendar(tableId, year, month) {
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
             const firstDay = new Date(year, month, 1);
             const lastDay = new Date(year, month + 1, 0);
             const daysInMonth = lastDay.getDate();
 
             const calendarTable = document.getElementById(tableId);
             const monthYearHeader = document.getElementById(`month-year`);
-            monthYearHeader.textContent = `${new Intl.DateTimeFormat('en-US', { month: 'long' }).format(firstDay)} ${year}`;
+            monthYearHeader.textContent = `${monthNames[firstDay.getMonth()]} ${year}`;
+
+            // Add day names row
+            const headerRow = calendarTable.insertRow();
+            dayNames.forEach(day => {
+                const headerCell = headerRow.insertCell();
+                headerCell.textContent = day;
+                headerCell.style.fontWeight = "bold";
+            });
 
             let dayCounter = 1;
 
