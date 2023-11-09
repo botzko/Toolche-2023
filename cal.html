@@ -61,10 +61,12 @@
 
     <script>
         function generateCalendar(tableId, year, month) {
-            // ... (Same logic as before)
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
 
             const calendarTable = document.getElementById(tableId);
-            const monthYearHeader = document.getElementById("month-year");
+            const monthYearHeader = document.getElementById(`month-year`);
             monthYearHeader.textContent = `${new Intl.DateTimeFormat('en-US', { month: 'long' }).format(firstDay)} ${year}`;
 
             let dayCounter = 1;
