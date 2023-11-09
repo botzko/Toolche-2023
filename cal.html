@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>November 2023 - January 2024 Calendar</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>November 2023 - January 2024 Calendar</h2>
+    <table id="calendar">
+        <thead>
+            <tr>
+                <th>November</th>
+                <th>December</th>
+                <th>January</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Calendar content will be generated here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Function to generate calendar days for a specific month
+        function generateMonthDays(year, month) {
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const monthDays = [];
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                monthDays.push(`<td>${day}</td>`);
+            }
+
+            return monthDays.join('');
+        }
+
+        // Function to fill the calendar table
+        function fillCalendar() {
+            const calendarBody = document.querySelector('#calendar tbody');
+            
+            // Assuming you want to generate for the year 2023
+            const year = 2023;
+
+            // Generate rows for each day in November, December, and January
+            const novemberDays = generateMonthDays(year, 10);  // Note: Months are 0-indexed
+            const decemberDays = generateMonthDays(year, 11);
+            const januaryDays = generateMonthDays(year + 1, 0);
+
+            // Create a row for each day
+            for (let day = 1; day <= Math.max(novemberDays.length, decemberDays.length, januaryDays.length); day++) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${novemberDays[day - 1] || ''}</td>
+                                 <td>${decemberDays[day - 1] || ''}</td>
+                                 <td>${januaryDays[day - 1] || ''}</td>`;
+                calendarBody.appendChild(row);
+            }
+        }
+
+        // Call the function to fill the calendar
+        fillCalendar();
+    </script>
+</body>
+</html>
