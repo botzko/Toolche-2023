@@ -60,7 +60,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script>
-        function generateCalendar(tableId, year, month) {
+        function generateCalendar(tableId, headerId, year, month) {
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -69,16 +69,18 @@
             const daysInMonth = lastDay.getDate();
 
             const calendarTable = document.getElementById(tableId);
-            const monthYearHeader = document.getElementById(`month-year`);
+            const monthYearHeader = document.getElementById(headerId);
             monthYearHeader.textContent = `${monthNames[firstDay.getMonth()]} ${year}`;
 
             // Add day names row
-            const headerRow = calendarTable.insertRow();
-            dayNames.forEach(day => {
-                const headerCell = headerRow.insertCell();
-                headerCell.textContent = day;
-                headerCell.style.fontWeight = "bold";
-            });
+            if (calendarTable.rows.length === 0) {
+                const headerRow = calendarTable.insertRow();
+                dayNames.forEach(day => {
+                    const headerCell = headerRow.insertCell();
+                    headerCell.textContent = day;
+                    headerCell.style.fontWeight = "bold";
+                });
+            }
 
             let dayCounter = 1;
 
@@ -98,9 +100,9 @@
         }
 
         const currentDate = new Date();
-        generateCalendar("calendar", currentDate.getFullYear(), currentDate.getMonth());
-        generateCalendar("next-calendar-1", currentDate.getFullYear(), currentDate.getMonth() + 1);
-        generateCalendar("next-calendar-2", currentDate.getFullYear(), currentDate.getMonth() + 2);
+        generateCalendar("calendar", "month-year", currentDate.getFullYear(), currentDate.getMonth());
+        generateCalendar("next-calendar-1", "next-month-year-1", currentDate.getFullYear(), currentDate.getMonth() + 1);
+        generateCalendar("next-calendar-2", "next-month-year-2", currentDate.getFullYear(), currentDate.getMonth() + 2);
     </script>
 
 </body>
